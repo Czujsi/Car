@@ -9,7 +9,7 @@ namespace car1
     public class Car
     {
         public int CurrentSpeed;
-        private readonly int MaxSpeed = 250;
+        public readonly int MaxSpeed = 250;
         public string Name { get; }
 
         public Car(string v)
