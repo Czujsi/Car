@@ -12,6 +12,7 @@ namespace car1.Test
 
             Assert.AreEqual(ExpectedMaxSpeed, car.MaxSpeed);
         }
+
         [TestMethod]
         public void CarMustHaveAName()
         {
@@ -20,6 +21,7 @@ namespace car1.Test
             Assert.AreEqual("Toyota", car.Name);
 
         }
+
         [TestMethod]
         [ExpectedException(typeof(ArgumentException),
         "Car must have name.")]
