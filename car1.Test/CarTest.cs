@@ -11,9 +11,6 @@ namespace car1.Test
             var car = new Car("Toyota");
 
             Assert.AreEqual(ExpectedMaxSpeed, car.MaxSpeed);
-            // public static void AreEqual(object expected, object actual)
-            // Upewnij siê, ¿e jest równe(co): spodziewam siê "Toyota" a dosta³em 250
-            // Upewnij siê, ¿e jest równe(co): spodziewam siê "Toyota" a dosta³em MaxSpeed musi siê równaæ 250
         }
         [TestMethod]
         public void CarMustHaveAName()
