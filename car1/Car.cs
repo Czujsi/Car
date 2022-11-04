@@ -8,12 +8,22 @@ namespace car1
 {
     public class Car
     {
+        /*
+        •włączenie/ wyłączenie silnika,
+        •zmiana biegów,
+        •przyspieszanie,
+        •hamowanie.
+        Podczas jazdy użytkownik powinien mieć możliwość obserwowania parametrów samochodu(szybkość, włączony bieg, obroty silnika).
+        */
+
         public int CurrentSpeed;
         public int CurrentGear = 0;
-        public readonly int Parking = 1;
+        public double CurrentEngineSpeed = 0;
+        public readonly int Parking;
         public readonly int MaxGear = 8;
         public readonly int MaxSpeed = 250;
         public readonly int MinGear;
+        public const int Neutral = 0;
 
         public string Name { get; }
 
@@ -30,6 +40,8 @@ namespace car1
             {
                 CurrentSpeed = MaxSpeed;
             }
+            SetGear(CurrentSpeed);
+            SetEngineSpeed(CurrentSpeed);
         }
 
         public void DecreaseSpeed(int v )
@@ -40,9 +52,63 @@ namespace car1
             {
                 CurrentSpeed = 0;
             }
+            SetGear(CurrentSpeed);
+            SetEngineSpeed(CurrentSpeed);
+        }
+        private void SetGear(int currentSpeed)
+        {
+            if (CurrentSpeed == 0)
+            {
+                CurrentGear = Neutral;
+            }
+            else if (CurrentSpeed > 0 && CurrentSpeed <= 20)
+            {
+                CurrentGear = 1;
+            }
+            else if (CurrentSpeed > 20 && CurrentSpeed <= 50)
+            {
+                CurrentGear = 2;
+            }
+            else if (CurrentSpeed > 50 && CurrentSpeed <= 80)
+            {
+                CurrentGear = 3;
+            }
+            else if (CurrentSpeed > 80 && CurrentSpeed <= 110)
+            {
+                CurrentGear = 4;
+            }
+            else if (CurrentSpeed > 110 && CurrentSpeed <= 150)
+            {
+                CurrentGear = 5;
+            }
+            else if (CurrentSpeed > 150 && CurrentSpeed <= 180)
+            {
+                CurrentGear = 6;
+            }
+            else if (CurrentSpeed > 180 && CurrentSpeed <= 210)
+            {
+                CurrentGear = 7;
+            }
+            else if (CurrentSpeed > 210 && CurrentSpeed <= 250)
+            {
+                CurrentGear = 8;
+            }
         }
 
-        private void ChangeValueCannotBeNegative(int v)
+        private void SetEngineSpeed(int currentSpeed)
+        {
+            if (CurrentSpeed == 0)
+            {
+                CurrentEngineSpeed = 900;
+            }
+            else
+            {
+                CurrentEngineSpeed = (CurrentSpeed / CurrentGear) * 100;
+            }
+           
+        }
+
+        public void ChangeValueCannotBeNegative(int v)
         {
             if (v < 0)
             {
@@ -50,18 +116,9 @@ namespace car1
             }
         }
 
-        public void IncreaseGear(int g)
+        public void IncreaseGear()
         {
-            ChangeValueCannotBeNegative(g);
-            if(g == 0 )
-            {
-                throw new ArgumentException("Nie można zwiększać biegów o wartość zerową.");
-            }
-            if (g > 1)
-            {
-                g = 1;
-            }
-            CurrentGear = g + CurrentGear;
+            CurrentGear = 1 + CurrentGear;
             if (CurrentGear > MaxGear)
             {
                 CurrentGear = MaxGear;
@@ -83,21 +140,30 @@ namespace car1
             
         }
 
-        public void NeutralGear(int n)
+        public void NeutralGear()
         {
-            ChangeValueCannotBeNegative(n);
-            CurrentGear = 0;
-           
+            CurrentGear = Neutral;
+            if (CurrentGear == Neutral)
+            {
+                CurrentEngineSpeed = 900;
+                CurrentSpeed = 0;
+            }
+            
+            
         }
 
-        public void ParkingGear(int p)
+        public void ParkingGear()
         {
-            ChangeValueCannotBeNegative(p);
             if(CurrentSpeed > 0)
             {
                 throw new ArgumentException("Nie można ustawić biegu parkingowego jeżeli prędkość samochodu przekracza 0 kmh");
             }
-            
+            else
+            {
+                CurrentSpeed = 0;
+                CurrentGear = 1;
+                CurrentEngineSpeed = 0;
+            }
         }
     }
 }

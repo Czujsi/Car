@@ -1,3 +1,5 @@
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 namespace car1.Test
 {
     [TestClass]
@@ -140,7 +142,7 @@ namespace car1.Test
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException),
-        "Nie mo¿na zmniejszyæ prêdkoœci o liczbê dodatni¹")]
+        "Nie mo¿na zmniejszyæ prêdkoœci o liczbê ujemn¹")]
         public void When_car_decrease_current_speed_by_x_value_then_decrease_current_speed_value_by_x()
         {
             // Given
@@ -195,7 +197,7 @@ namespace car1.Test
     }
 
     [TestClass]
-    public class CarIncreaseGears
+    public class ManualCarIncreaseGears
     {
         public const int ExceptedMaxGear = 8;
         [TestMethod]
@@ -217,35 +219,20 @@ namespace car1.Test
             var car = new Car("Toyota");
 
             // When
-            car.IncreaseGear(1);
-            car.IncreaseGear(1);
-            car.IncreaseGear(1);
-            car.IncreaseGear(1);
-            car.IncreaseGear(1);
-            car.IncreaseGear(1);
-            car.IncreaseGear(1);
-            car.IncreaseGear(1);
-            car.IncreaseGear(1);
-            car.IncreaseGear(1);
-            car.IncreaseGear(1);
+            car.IncreaseGear();
+            car.IncreaseGear();
+            car.IncreaseGear();
+            car.IncreaseGear();
+            car.IncreaseGear();
+            car.IncreaseGear();
+            car.IncreaseGear();
+            car.IncreaseGear();
+            car.IncreaseGear();
+            car.IncreaseGear();
+            car.IncreaseGear();
 
             // Then
             Assert.AreEqual(ExceptedMaxGear, car.CurrentGear);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentException),
-        "Nie mo¿na zwiêkszaæ biegów o wartoœæ zerow¹.")]
-        public void When_car_increase_gear_by_0_then_expected_exception()
-        {
-            // Given
-            var car = new Car("Toyota");
-
-            // When
-            car.IncreaseGear(0);
-
-            // Then
-            /// ExpectedException
         }
 
         [TestMethod]
@@ -255,7 +242,7 @@ namespace car1.Test
             var car = new Car("Toyota");
 
             // When
-            car.IncreaseGear(1);
+            car.IncreaseGear();
 
             // Then
             Assert.AreEqual(1, car.CurrentGear);
@@ -268,25 +255,10 @@ namespace car1.Test
             var car = new Car("Toyota");
 
             // When
-            car.IncreaseGear(4);
+            car.IncreaseGear();
 
             // Then
             Assert.AreEqual(1, car.CurrentGear);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentException),
-        "Nie mo¿na zwiêkszaæ biegów o wartoœci ujemne.")]
-        public void When_car_increase_gear_by_negative_x_then_expected_exception()
-        {
-            // Given
-            var car = new Car("Toyota");
-
-            // When
-            car.IncreaseGear(-4);
-
-            // Then
-            /// Nie mo¿na zwiêkszaæ biegów o wartoœci ujemne
         }
 
         [TestMethod]
@@ -296,18 +268,18 @@ namespace car1.Test
             var car = new Car("Toyota");
 
             // When
-            car.IncreaseGear(1);
-            car.IncreaseGear(1);
-            car.IncreaseGear(1);
+            car.IncreaseGear();
+            car.IncreaseGear();
+            car.IncreaseGear();
 
             // Then
             Assert.AreEqual(3, car.CurrentGear);
         }
 
-    }
+    } 
 
     [TestClass]
-    public class CarDecreaseGears
+    public class ManualCarDecreaseGears
     {
         public const int ExceptedMinGear = 0;
 
@@ -318,8 +290,8 @@ namespace car1.Test
             var car = new Car("Toyota");
 
             //When
-            car.IncreaseGear(1);
-            car.IncreaseGear(1);
+            car.IncreaseGear();
+            car.IncreaseGear();
             car.DecreaseGear(1);
             car.DecreaseGear(1);
             car.DecreaseGear(1);
@@ -335,8 +307,8 @@ namespace car1.Test
             var car = new Car("Toyota");
 
             // When
-            car.IncreaseGear(1);
-            car.IncreaseGear(1);
+            car.IncreaseGear();
+            car.IncreaseGear();
             car.DecreaseGear(1);
 
             // Then
@@ -349,8 +321,8 @@ namespace car1.Test
             var car = new Car("Toyota");
 
             // When
-            car.IncreaseGear(1);
-            car.IncreaseGear(1);
+            car.IncreaseGear();
+            car.IncreaseGear();
             car.DecreaseGear(2);
 
             // Then
@@ -363,8 +335,8 @@ namespace car1.Test
             var car = new Car("Toyota");
 
             // When
-            car.IncreaseGear(1);
-            car.IncreaseGear(1);
+            car.IncreaseGear();
+            car.IncreaseGear();
             car.DecreaseGear(5);
 
             // Then
@@ -399,10 +371,11 @@ namespace car1.Test
             /// ExpectedException
         }
     }
+
     [TestClass]
-    public class CarParkingGear
+    public class ManualCarParkingGear
     {
-        public readonly int ParkingGear = 1;
+        public readonly int ParkingGear;
 
         [TestMethod]
         public void Car_must_have_a_parking_gear()
@@ -411,7 +384,7 @@ namespace car1.Test
             var car = new Car("Toyota");
 
             // When
-            car.ParkingGear(ParkingGear);
+            car.ParkingGear();
 
             // Then
             Assert.AreEqual(ParkingGear, car.Parking);
@@ -427,7 +400,7 @@ namespace car1.Test
             // When
             car.IncreaseSpeed(100);
 
-            car.ParkingGear(ParkingGear);
+            car.ParkingGear();
 
             // Then
             Assert.AreEqual(ParkingGear, car.CurrentSpeed);
@@ -435,10 +408,11 @@ namespace car1.Test
         }
 
     }
+
     [TestClass]
-    public class CarNeutralGear
+    public class ManualCarNeutralGear
     {
-        public readonly int NeutralGear = 0;
+        public readonly int NeutralGear;
 
         [TestMethod]
         public void Car_must_have_a_neutral_gear()
@@ -447,11 +421,116 @@ namespace car1.Test
             var car = new Car("Toyota");
 
             // When
-            car.NeutralGear(NeutralGear);
+            car.NeutralGear();
 
             // Then
             Assert.AreEqual(NeutralGear, car.CurrentGear);
         }
     }
+
+    [TestClass]
+    public class EngineSpeed
+    {
+        [TestMethod]
+
+        [DataRow(0, 900)]
+        [DataRow(1, 100)]
+        [DataRow(20, 2000)]
+        [DataRow(21, 1000)]
+        [DataRow(50, 2500)]
+        [DataRow(51, 1700)]
+        [DataRow(80, 2600)]
+        [DataRow(81, 2000)]
+        [DataRow(110, 2700)]
+        [DataRow(111, 2200)]
+        [DataRow(150, 3000)]
+        [DataRow(151, 2500)]
+        [DataRow(180, 3000)]
+        [DataRow(181, 2500)]
+        [DataRow(210, 3000)]
+        [DataRow(211, 2600)]
+        [DataRow(250, 3100)]
+        [DataTestMethod]
+        public void Car_must_have_engine_speed(int speed, int expextedEngineSpeed)
+        {
+            var car = new Car("Toyota");
+
+            car.IncreaseSpeed(speed);
+
+            Assert.AreEqual(expextedEngineSpeed, car.CurrentEngineSpeed);
+        }
+    }
     
+
+    [TestClass]
+    public class CarShifterSystem
+    {
+        
+        [DataRow(0, Car.Neutral)]
+        [DataRow(1, 1)]
+        [DataRow(20, 1)]
+        [DataRow(21, 2)]
+        [DataRow(50, 2)]
+        [DataRow(51, 3)]
+        [DataRow(80, 3)]
+        [DataRow(81, 4)]
+        [DataRow(110, 4)]
+        [DataRow(111, 5)]
+        [DataRow(150, 5)]
+        [DataRow(151, 6)]
+        [DataRow(180, 6)]
+        [DataRow(181, 7)]
+        [DataRow(210, 7)]
+        [DataRow(211, 8)]
+        [DataRow(250, 8)]
+        [DataTestMethod]
+        public void When_car_increase_speed_then_increase_gears(int speed, int expectedGear)
+        {
+            // Given
+            var car = new Car("Toyota");
+
+            // When
+            car.IncreaseSpeed(speed);
+
+            // Then
+            Assert.AreEqual(expectedGear, car.CurrentGear);
+        }
+     
+        [DataRow(250, Car.Neutral)]
+        [DataRow(249, 1)]
+        [DataRow(230, 1)]
+        [DataRow(229, 2)]
+        [DataRow(200, 2)]
+        [DataRow(199, 3)]
+        [DataRow(170, 3)]
+        [DataRow(169, 4)]
+        [DataRow(140, 4)]
+        [DataRow(139, 5)]
+        [DataRow(100, 5)]
+        [DataRow(99, 6)]
+        [DataRow(70, 6)]
+        [DataRow(69, 7)]
+        [DataRow(40, 7)]
+        [DataRow(39, 8)]
+        [DataRow(1, 8)]
+        [DataTestMethod]
+        public void When_car_decrease_speed_then_decrease_gears(int speed, int expectedGear)
+        {
+            // Given
+            var car = new Car("Toyota");
+
+            // When
+            car.IncreaseSpeed(250);
+            car.DecreaseSpeed(speed);
+
+            // Then
+            Assert.AreEqual(expectedGear, car.CurrentGear);
+        }
+
+        
+
+
+
+    }
+
 }

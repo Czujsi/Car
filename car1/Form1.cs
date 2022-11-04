@@ -7,50 +7,139 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using TrackBar = System.Windows.Forms.TrackBar;
 
 namespace car1
 {
-    public partial class Form1 : Form
+    public partial class Form1 : System.Windows.Forms.Form
     {
-        int speedIncrease;
-        int speedDecrease;
-        int counter;
+        Car car1;
         public Form1()
         {
             InitializeComponent();
             
-            speedDecrease = 0;
-            
-            
+            car1 = new Car("Toyota");
+        }
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            RefreshData();
+        }
+        private bool _IsOn;
+        bool start;
+        public bool IsOn
+        {
+            get
+            {
+                return _IsOn;
+            }
+            set
+            {
+                _IsOn = value;
+                EngineIgnition.Text = _IsOn ? "Start" : "Stop";
+            }
+        }
+        private void EngineIgnition_Click(object sender, EventArgs e)
+        {
+            if (start != true)
+            {
+                RefreshData();
+                car1.NeutralGear();
+                SpeedUp.Enabled = false;
+                SlowDown.Enabled = false;
+                trackBar1.Enabled = false;
+                setSpeedBox.Enabled = false;
+                NeutralGear.Enabled = true;
+               
+                start = true;
+            }
+            else if(start != false)
+            {
+                RefreshData();
+                
+                car1.CurrentEngineSpeed = 0;
+                setSpeedBox.Enabled = true;
+                SpeedUp.Enabled = true;
+                SlowDown.Enabled = true;
+                trackBar1.Enabled = true;
+                NeutralGear.Enabled = true;
+
+                start = false;
+            }
+            IsOn = !IsOn;
 
         }
-
-        private void timer1_Tick(object sender, EventArgs e)
+        void RefreshData()
         {
-            if(speedIncrease >= 25)
+            CarNameDisplay.Text = car1.Name;
+            CurrentSpeedDisplay.Text = car1.CurrentSpeed.ToString();
+            EngineSpeedDisplay.Text = car1.CurrentEngineSpeed.ToString();
+            CurrentGearDisplay.Text = car1.CurrentGear.ToString();
+        }
+
+        int GetSpeed()
+        {
+            var input = setSpeedBox.Text;
+            if (input == "")
             {
-                speedIncrease = 25;
+                return 0;
+            }
+            else if (int.Parse(input) < 0)
+            {
+                return 0;
             }
             else
             {
-                speedIncrease++;
+                return int.Parse(input);
             }
-            label1.Text = speedIncrease.ToString();
-            
 
         }
-        void Acceleration()
+
+        private void SpeedUp_Click(object sender, EventArgs e)
         {
-            speedIncrease = 0;
-            timer1.Enabled = true;
+            car1.IncreaseSpeed(GetSpeed());
+            RefreshData();
         }
 
-        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        private void SlowDown_Click(object sender, EventArgs e)
         {
-            if (e.KeyCode == Keys.W)
+            car1.DecreaseSpeed(GetSpeed());
+            RefreshData();
+        }
+
+        private void TrackBar_SpeedUP_SlowDown_Scroll(object sender, EventArgs e)
+        {
+            var input = ((TrackBar)sender).Value;
+            var carSpeed = car1.CurrentSpeed;
+            if (carSpeed < input)
             {
-                Acceleration();
+                car1.IncreaseSpeed(input - carSpeed);
             }
+            else
+            {
+                car1.DecreaseSpeed(carSpeed - input);
+            }
+            RefreshData();
+        }
+
+        private void CreateCar_Click(object sender, EventArgs e)
+        {
+            car1 = new Car(NewCarName.Text);
+            trackBar1.Value = car1.CurrentSpeed;
+            RefreshData();
+        }
+
+        private void NeutralGear_Click(object sender, EventArgs e)
+        {
+            car1.NeutralGear();
+            trackBar1.Value = car1.CurrentSpeed;
+            RefreshData();
+        }
+
+        private void ParkingGear_Click(object sender, EventArgs e)
+        {
+            RefreshData();
+            car1.ParkingGear();
         }
     }
 }
