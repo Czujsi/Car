@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -50,7 +51,9 @@ namespace car1
                 trackBar1.Enabled = false;
                 setSpeedBox.Enabled = false;
                 NeutralGear.Enabled = true;
-               
+                infoLabel.Text = "";
+                trackBar1.Value = 0;
+
                 start = true;
             }
             else if(start != false)
@@ -72,9 +75,60 @@ namespace car1
         void RefreshData()
         {
             CarNameDisplay.Text = car1.Name;
-            CurrentSpeedDisplay.Text = car1.CurrentSpeed.ToString();
-            EngineSpeedDisplay.Text = car1.CurrentEngineSpeed.ToString();
+
             CurrentGearDisplay.Text = car1.CurrentGear.ToString();
+
+            
+
+            CurrentSpeedDisplay.Text = car1.CurrentSpeed.ToString();
+
+            if (car1.CurrentEngineSpeed > 600 && car1.CurrentGear == 1)
+            {
+                infoLabel.Text = "";
+            }
+            else if (car1.CurrentEngineSpeed < 600 && car1.CurrentGear == 2)
+            {
+                infoLabel.Text = "samochód zgasł";
+                car1.CurrentEngineSpeed = 0;
+                trackBar1.Value = 0;
+                CurrentGearDisplay.Text = "0";
+            }
+            else if (car1.CurrentEngineSpeed < 600 && car1.CurrentGear == 3)
+            {
+                infoLabel.Text = "samochód zgasł";
+                car1.CurrentEngineSpeed = 0;
+                trackBar1.Value = 0;
+                CurrentGearDisplay.Text = "0";
+            }
+            else if (car1.CurrentEngineSpeed < 600 && car1.CurrentGear == 4)
+            {
+                infoLabel.Text = "samochód zgasł";
+                car1.CurrentEngineSpeed = 0;
+                trackBar1.Value = 0;
+                CurrentGearDisplay.Text = "0";
+
+            }
+            else if (car1.CurrentEngineSpeed < 600 && car1.CurrentGear == 5)
+            {
+                infoLabel.Text = "samochód zgasł";
+                car1.CurrentEngineSpeed = 0;
+                trackBar1.Value = 0;
+                CurrentGearDisplay.Text = "0";
+            }
+
+            if (car1.CurrentEngineSpeed > 6000)
+            {
+                infoLabel.Text = "samochód wybuchł BUUUUUM";
+                car1.CurrentEngineSpeed = 0;
+                trackBar1.Value = 0;
+                car1.CurrentSpeed = 0;
+                CurrentSpeedDisplay.Text = "0";
+                CurrentGearDisplay.Text = "0";
+                CarNameDisplay.Text = "Wrak" + car1.Name;
+            }
+
+
+            EngineSpeedDisplay.Text = car1.CurrentEngineSpeed.ToString();
         }
 
         int GetSpeed()
@@ -93,6 +147,12 @@ namespace car1
                 return int.Parse(input);
             }
 
+        }
+
+        private void Engine_Speed()
+        {
+            car1.SetEngineSpeed(GetSpeed());
+            RefreshData();
         }
 
         private void SpeedUp_Click(object sender, EventArgs e)
@@ -142,5 +202,54 @@ namespace car1
             car1.ParkingGear();
         }
 
+        private void Gear_1_Click(object sender, EventArgs e)
+        {
+            car1.CurrentGear = 1;
+            
+            Engine_Speed();
+            RefreshData();
+        }
+
+        private void Gear_2_Click(object sender, EventArgs e)
+        {
+            car1.CurrentGear = 2;
+            Engine_Speed();
+            RefreshData();
+        }
+
+        private void Gear_3_Click(object sender, EventArgs e)
+        {
+            car1.CurrentGear = 3;
+            Engine_Speed();
+            RefreshData();
+        }
+
+        private void Gear_4_Click(object sender, EventArgs e)
+        {
+            car1.CurrentGear = 4;
+            Engine_Speed();
+            RefreshData();
+        }
+
+        private void Gear_5_Click(object sender, EventArgs e)
+        {
+            car1.CurrentGear = 5;
+            Engine_Speed();
+            RefreshData();
+        }
+
+        private void Gear_R_Click(object sender, EventArgs e)
+        {
+            if(car1.CurrentSpeed == 0)
+            {
+                car1.CurrentGear = 1; //RewerseGear
+                Engine_Speed();
+                RefreshData();
+            }
+            else
+            {
+                infoLabel.Text = "Nie można wrzucać biegu wstecznego podczas jazdy do przodu";
+            }
+        }
     }
 }

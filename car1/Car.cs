@@ -40,8 +40,9 @@ namespace car1
             {
                 CurrentSpeed = MaxSpeed;
             }
-            SetGear(CurrentSpeed);
             SetEngineSpeed(CurrentSpeed);
+            //SetGear(CurrentSpeed);
+            //SetEngineSpeed(CurrentSpeed);
         }
 
         public void DecreaseSpeed(int v )
@@ -57,7 +58,7 @@ namespace car1
         }
         private void SetGear(int currentSpeed)
         {
-            if (CurrentSpeed == 0)
+            /*if (CurrentSpeed == 0)
             {
                 CurrentGear = Neutral;
             }
@@ -93,9 +94,10 @@ namespace car1
             {
                 CurrentGear = 8;
             }
+            */
         }
 
-        private void SetEngineSpeed(int currentSpeed)
+        public void SetEngineSpeed(int currentSpeed)
         {
             if (CurrentSpeed == 0)
             {

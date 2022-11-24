@@ -42,6 +42,13 @@
             this.NeutralGear = new System.Windows.Forms.Button();
             this.EngineIgnition = new System.Windows.Forms.Button();
             this.ParkingGear = new System.Windows.Forms.Button();
+            this.Gear_1 = new System.Windows.Forms.Button();
+            this.Gear_3 = new System.Windows.Forms.Button();
+            this.Gear_5 = new System.Windows.Forms.Button();
+            this.Gear_2 = new System.Windows.Forms.Button();
+            this.Gear_4 = new System.Windows.Forms.Button();
+            this.Gear_R = new System.Windows.Forms.Button();
+            this.infoLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -173,11 +180,88 @@
             this.ParkingGear.UseVisualStyleBackColor = true;
             this.ParkingGear.Click += new System.EventHandler(this.ParkingGear_Click);
             // 
+            // Gear_1
+            // 
+            this.Gear_1.Location = new System.Drawing.Point(12, 160);
+            this.Gear_1.Name = "Gear_1";
+            this.Gear_1.Size = new System.Drawing.Size(40, 37);
+            this.Gear_1.TabIndex = 15;
+            this.Gear_1.Text = "1";
+            this.Gear_1.UseVisualStyleBackColor = true;
+            this.Gear_1.Click += new System.EventHandler(this.Gear_1_Click);
+            // 
+            // Gear_3
+            // 
+            this.Gear_3.Location = new System.Drawing.Point(58, 160);
+            this.Gear_3.Name = "Gear_3";
+            this.Gear_3.Size = new System.Drawing.Size(40, 37);
+            this.Gear_3.TabIndex = 16;
+            this.Gear_3.Text = "3";
+            this.Gear_3.UseVisualStyleBackColor = true;
+            this.Gear_3.Click += new System.EventHandler(this.Gear_3_Click);
+            // 
+            // Gear_5
+            // 
+            this.Gear_5.Location = new System.Drawing.Point(104, 160);
+            this.Gear_5.Name = "Gear_5";
+            this.Gear_5.Size = new System.Drawing.Size(40, 37);
+            this.Gear_5.TabIndex = 17;
+            this.Gear_5.Text = "5";
+            this.Gear_5.UseVisualStyleBackColor = true;
+            this.Gear_5.Click += new System.EventHandler(this.Gear_5_Click);
+            // 
+            // Gear_2
+            // 
+            this.Gear_2.Location = new System.Drawing.Point(12, 203);
+            this.Gear_2.Name = "Gear_2";
+            this.Gear_2.Size = new System.Drawing.Size(40, 37);
+            this.Gear_2.TabIndex = 18;
+            this.Gear_2.Text = "2";
+            this.Gear_2.UseVisualStyleBackColor = true;
+            this.Gear_2.Click += new System.EventHandler(this.Gear_2_Click);
+            // 
+            // Gear_4
+            // 
+            this.Gear_4.Location = new System.Drawing.Point(58, 203);
+            this.Gear_4.Name = "Gear_4";
+            this.Gear_4.Size = new System.Drawing.Size(40, 37);
+            this.Gear_4.TabIndex = 19;
+            this.Gear_4.Text = "4";
+            this.Gear_4.UseVisualStyleBackColor = true;
+            this.Gear_4.Click += new System.EventHandler(this.Gear_4_Click);
+            // 
+            // Gear_R
+            // 
+            this.Gear_R.Location = new System.Drawing.Point(104, 203);
+            this.Gear_R.Name = "Gear_R";
+            this.Gear_R.Size = new System.Drawing.Size(40, 37);
+            this.Gear_R.TabIndex = 20;
+            this.Gear_R.Text = "R";
+            this.Gear_R.UseVisualStyleBackColor = true;
+            this.Gear_R.Click += new System.EventHandler(this.Gear_R_Click);
+            // 
+            // infoLabel
+            // 
+            this.infoLabel.AutoSize = true;
+            this.infoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.infoLabel.Location = new System.Drawing.Point(246, 220);
+            this.infoLabel.Name = "infoLabel";
+            this.infoLabel.Size = new System.Drawing.Size(84, 20);
+            this.infoLabel.TabIndex = 21;
+            this.infoLabel.Text = "Informacje";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(772, 473);
+            this.Controls.Add(this.infoLabel);
+            this.Controls.Add(this.Gear_R);
+            this.Controls.Add(this.Gear_4);
+            this.Controls.Add(this.Gear_2);
+            this.Controls.Add(this.Gear_5);
+            this.Controls.Add(this.Gear_3);
+            this.Controls.Add(this.Gear_1);
             this.Controls.Add(this.ParkingGear);
             this.Controls.Add(this.EngineIgnition);
             this.Controls.Add(this.NeutralGear);
@@ -215,6 +299,13 @@
         private System.Windows.Forms.Button NeutralGear;
         private System.Windows.Forms.Button EngineIgnition;
         private System.Windows.Forms.Button ParkingGear;
+        private System.Windows.Forms.Button Gear_1;
+        private System.Windows.Forms.Button Gear_3;
+        private System.Windows.Forms.Button Gear_5;
+        private System.Windows.Forms.Button Gear_2;
+        private System.Windows.Forms.Button Gear_4;
+        private System.Windows.Forms.Button Gear_R;
+        private System.Windows.Forms.Label infoLabel;
     }
 }
 
